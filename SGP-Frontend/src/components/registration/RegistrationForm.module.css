@@ -1,0 +1,73 @@
+.container { 
+  max-width: 100%;
+    margin: auto; 
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url("C:\Users\rutub\Downloads\undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41_-1-_kf4d.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #34aeeb;
+    border-radius: 0%;
+    align-items: center;
+    width:auto;
+  }
+  .RegistrationForm{
+    width: 350px;
+    padding: 20px;
+    border-radius: 16px;
+    background: linear-gradient(225deg, #d1d1d1, #f8f8f8);
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .form h4 {
+    color: var(--primary); 
+    margin-bottom: 0px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+  .form-control {
+    border: 1px solid  var(--primary); 
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  .submitButton {
+    background-color:var(--primary);
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+
+  }
+  
+  .submitButton:hover {
+    background-color: var(--secondary); 
+  }
+  
+  .loginLink {
+    margin-top:10px;
+    float: right;
+  }
+  
+  .loginLink a {
+    color:var(--primary);
+  }
+  
+  .loginLink a:hover {
+    text-decoration: underline;
+  }

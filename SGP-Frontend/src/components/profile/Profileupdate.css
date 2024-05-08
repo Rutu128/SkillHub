@@ -1,0 +1,41 @@
+.profile-update-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .profile-update-form label {
+    font-weight: bold;
+  }
+  
+  .profile-update-form input[type="number"],
+  .profile-update-form input[type="text"],
+  .profile-update-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .profile-update-form textarea {
+    resize: vertical;
+  }
+  
+  .profile-update-form .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .profile-update-form .remove-button {
+    margin-left: 10px;
+  }
+  
+  .profile-update-form .button-container button {
+    width: 48%;
+  }
+  
+  .profile-update-form .button-container button:last-child {
+    margin-left: 0;
+  }
