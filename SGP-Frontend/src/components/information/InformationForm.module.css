@@ -2,7 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
- 
+  background: linear-gradient(135deg, #62b4f7, #ba6af7);
+  height: 100vh;
+  border-radius: 0%;
 }
 
 .container_info form {
@@ -12,6 +14,8 @@
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff97;
+  backdrop-filter: blur(10px);
 }
 .form h4 {
   color:var(--primary); 

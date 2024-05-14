@@ -9,6 +9,7 @@ import mongoose from 'mongoose';
 import { Skill } from '../models/skill.model.js';
 import { Project } from '../models/project.model.js';
 import { Info } from '../models/info.model.js';
+import { Post } from '../models/post.model.js';
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -462,19 +463,24 @@ const changePassword = asyncHandler(async (req, res) => {
 
 const getUserDetails = asyncHandler(async (req, res) => {
     const { id } = req.params
-    const user = await User.findById(id).select("-password -refreshToken -isVerified -forgotPassword")
+    console.log(id)
+    const post = await Post.findById(id)
+    if (!post) {
+        throw new ApiError(404, "Post not found")
+    }
+    const user = post.user
     if (!user) {
         throw new ApiError(404, "User not found")
     }
-    const infos = await Info.findOne({ user: id })
+    const infos = await Info.findOne({ user: user._id })
     if (!infos) {
         throw new ApiError(404, "User information not found")
     }
-    const skill = await Skill.findOne({ user: id })
+    const skill = await Skill.findOne({ user: user._id})
     if (!skill) {
         throw new ApiError(404, "User has no skill added")
     }
-    const project = await Project.findOne({ user: id })
+    const project = await Project.findOne({ user: user._id})
     if (!project) {
         throw new ApiError(404, "User has no project added")
     }

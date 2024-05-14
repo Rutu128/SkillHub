@@ -18,7 +18,10 @@ import ResetPassword from "./components/resetpassword/ResetPassword";
 import Home from "./components/home/home";
 import Logout from "./components/logout/logout";
 import ProfilePage from "./components/profile/userProfile";
-import Profileupdate from "./components/profile/editProfile";
+// import Profileupdate from "./components/profile/editProfile";
+// import UpdateProfilePage from "./components/profile/editProfile";
+// import updatedProfile from "./components/profile/updatedProfile";
+import UpdatedProfile from "./components/profile/updatedProfile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,7 +37,7 @@ const router = createBrowserRouter(
       <Route path="profile" element={<ProfilePage />} />
       <Route path="home" element={<Home />} />
       <Route path="logout" element={<Logout />} />
-      <Route path="updateprofile" element={<Profileupdate />} />
+      <Route path="updateprofile" element={<UpdatedProfile/>} />
     </Route>
   )
 );

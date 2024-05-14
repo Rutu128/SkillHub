@@ -43,7 +43,7 @@ const LoginForm = () => {
             Submit
           </Button>
           <Link className={styles.createAccountLink} to={routes.register}>
-            Register?
+            New User?
           </Link>
           <br />
           <Link

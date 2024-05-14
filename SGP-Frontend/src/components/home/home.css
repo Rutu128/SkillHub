@@ -7,10 +7,18 @@
   h1 {
     color: black;
   }
+
+  .MuiLink-root{
+    border-radius: 20%;
+  }
+
+  .image-fix{
+    border-radius: 0%;
+  }
   
   
   .posts .post__header {
-    min-height: 100vh;
+    /* min-height: 100vh; */
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -88,11 +88,12 @@
 /* Container */
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: center;  
   border-radius: 0%;
   align-items: center;
   height: 100vh;
-  background-image: url("C:\Users\rutub\Downloads\undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41_-1-_kf4d.svg");
+  /* background-image: url("C:\Users\rutub\Downloads\undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41_-1-_kf4d.svg"); */
+  background: linear-gradient(135deg, #62b4f7, #ba6af7);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -102,17 +103,33 @@
 /* Form */
 .loginform {
   width: 350px;
-  padding: 20px;
-  border-radius: 52px;
-  background: linear-gradient(225deg, #d1d1d1, #f8f8f8);
+  /* padding: 30px; */
+  /* opacity: 0; */
+  /* border-radius: 52px; */
+  /* background: linear-gradient(225deg, #d1d1d1, #f8f8f8);
+   */
+   /* background-color: #ffffff97;
+  backdrop-filter: blur(10px); */
+  background: transparent;
+  /* text-align: center; */
   /* box-shadow:  -16px 16px 25px #e6e6e6,
                16px -16px 25px #eaeaea; */
+}
+
+form{
+  margin: none !important;
+  padding: 30px;
+  background-color: #ffffff97;
+  backdrop-filter: blur(10px);
+  /* background: transparent; */
 }
 
 /* Title */
 .loginform h4 {
   margin-bottom: 20px;
   text-align: center;
+  font-size: 28px;
+  font-weight: 800;
 }
 
 /* Input fields */
@@ -122,19 +139,29 @@
 
 /* Submit button */
 .loginform Button[type="submit"] {
-  margin-top: 10px;
+  margin: 10px 0px;
 }
-
+/* 
 /* Register and Forgot password links */
-.createAccountLink,
+/* .createAccountLink,
 .forgotPasswordLink {
   display: block;
   text-align: center;
+  text-decoration: none;
   margin-top: 10px;
-  color: #007bff; /* Blue color for links */
-}
+  color: #007bff;
+}*/
 
-.createAccountLink:hover,
+ .createAccountLink:hover,
 .forgotPasswordLink:hover {
   text-decoration: underline;
+}   
+
+.createAccountLink,
+.forgotPasswordLink {
+  text-decoration: none;
+}
+
+.createAccountLink {
+  margin: 10px 0px;
 }

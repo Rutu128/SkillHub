@@ -10,7 +10,7 @@ import Link from '@mui/joy/Link';
 import Favorite from '@mui/icons-material/Favorite';
 import { Image } from 'antd';
 
-export default function Post({ userName, title, description, imageUrl }) {
+export default function Post({ userName, title, description, imageUrl,id }) {
     const handleopen = ()=> {
         <Image src={imageUrl} />
     }
@@ -24,9 +24,10 @@ export default function Post({ userName, title, description, imageUrl }) {
                         loading="lazy"
                         alt=""
                         onClick={handleopen}
+                        className='image-fix'
                     />
                 </AspectRatio>
-                <IconButton
+                {/* <IconButton
                     aria-label="Like minimal photography"
                     size="md"
                     variant="solid"
@@ -41,7 +42,7 @@ export default function Post({ userName, title, description, imageUrl }) {
                     }}
                 >
                     <Favorite />
-                </IconButton>
+                </IconButton> */}
             </CardOverflow>
             <CardContent>
                 <Typography level="title-md">
@@ -58,14 +59,14 @@ export default function Post({ userName, title, description, imageUrl }) {
                     <Link href="#multiple-actions">{userName}</Link>
                 </Typography>
             </CardContent>
-            <CardOverflow variant="soft">
+            {/* <CardOverflow variant="soft">
                 <Divider inset="context" />
                 <CardContent orientation="horizontal">
                     <Typography level="body-xs">6.3k Likes</Typography>
                     <Divider orientation="vertical" />
                     <Typography level="body-xs">1 hour ago</Typography>
                 </CardContent>
-            </CardOverflow>
+            </CardOverflow> */}
         </Card>
     );
 }

@@ -6,7 +6,9 @@
   color: black;
   height: 70px;
   padding: 0px 10px 3px;
-  box-shadow: 3px 3px 3px rgb(225, 225, 225);
+  box-shadow: 3px 3px 3px rgba(225, 225, 225, 0.582);
+  /* background: linear-gradient(135deg, #62b4f7, #ba6af7); */
+  background: transparent;
 }
 
 /* .header{

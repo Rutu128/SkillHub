@@ -9,7 +9,7 @@ const projectSchema = new Schema({
     },
     project: [
         {
-            name: {
+            title: {
                 type: String,
                 required: true
             },

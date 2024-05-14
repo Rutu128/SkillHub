@@ -16,3 +16,5 @@ export const GETPROJECTS = `${API_BASE_URL}users/get-projects`
 export const ADDSKILL = `${API_BASE_URL}users/add-skill`
 export const ADDPROJECT = `${API_BASE_URL}users/add-project`
 export const CHANGECGPA = `${API_BASE_URL}users/change-cgpa`
+export const ADDPOST = `${API_BASE_URL}users/add-post`
+export const GETUSER = `${API_BASE_URL}user/:id`

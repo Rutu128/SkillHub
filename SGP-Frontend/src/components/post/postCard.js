@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
-
+import { toast } from "react-toastify";
+import { ADDPOST } from "../../constants/api";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../constants/routes";
 
 const UploadCertificate = () => {
     const [image, setImage] = useState("");
@@ -8,7 +11,7 @@ const UploadCertificate = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-
+    const navigate = useNavigate()
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setImage(file);
@@ -17,31 +20,41 @@ const UploadCertificate = () => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
+
         setIsLoading(true);
         const formdata = new FormData();
         formdata.append("file", image);
         formdata.append("upload_preset", "s3zv7zdt");
         let imgurl = "";
-        await axios.post("https://api.cloudinary.com/v1_1/dgz8lnzir/image/upload", formdata)
+        await axios.post("https://api.cloudinary.com/v1_1/dgz8lnzir/image/upload", formdata, { withCredentials: false })
             .then((res) => {
                 if (res.status === 200) {
                     imgurl = res.data.secure_url
                     // console.log(res.data.secure_url);
                     setTimeout(() => {
                         setIsLoading(false);
-                        alert("Certificate uploaded successfully!");
+                        toast.success("Certificate uploaded successfully!");
                     }, 2000);
                 }
             })
             .catch((error) => {
-                console.error("Error uploading image: ", error);
+                toast.error(error)
             });
         let data = {
             title,
             description,
             imgurl
         }
-        console.log(data)
+        const res = axios.post(ADDPOST, data, { withCredentials: true })
+            .catch((error) => {
+                toast.error(error)
+                if (error.response.status === 401) {
+                    toast.error("Session Timeout")
+                    navigate(routes.login)
+
+                }
+            })
+
     };
     return (
         <section className="flex justify-center items-center">
@@ -72,7 +85,7 @@ const UploadCertificate = () => {
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     className="block w-full border border-gray-300 rounded-md shadow-sm text-sm leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                                    style={{ borderRadius: '0', padding: '10px', width: '400px', height: '120px' }} required
+                                    style={{ borderRadius: '0', padding: '10px', width: '300px', height: '120px' }} required
                                 />
                             </div>
                         </div>

@@ -133,7 +133,7 @@ const InformationForm = () => {
 
           />
         </Form.Group> */}
-        <Form.Group className="mb-3" controlId="avatar">
+        {/* <Form.Group className="mb-3" controlId="avatar">
 
           <Button1
             component="label"
@@ -164,7 +164,7 @@ const InformationForm = () => {
             <VisuallyHiddenInput type="file" accept=".png,.jpg,.jpeg" onChange={(e) => { setImage(e.target.files[0]) }} />
             <img src={image} />
           </Button1>
-        </Form.Group>
+        </Form.Group> */}
 
         <Form.Group className="mb-3" controlId="choice">
           <Form.Label>Placement or Higher study</Form.Label>

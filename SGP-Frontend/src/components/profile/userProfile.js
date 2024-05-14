@@ -2,7 +2,7 @@ import react from 'react';
 import Header from '../header/header.js';
 import Headeroptions from '../header/Headeroptions.js';
 import Profile from './Profile.js';
-
+// import "./Profileupdate.css";
 
 function ProfilePage({ name, message }) {
     return (

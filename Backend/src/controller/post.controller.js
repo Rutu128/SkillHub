@@ -36,6 +36,7 @@ const addPost = asyncHandler(async (req, res) => {
     // if (!uploadPost) {
     //     throw new ApiError(400, "Post not upload on server")
     // }
+    console.log(title,description,imgurl)
     const post = await Post.create({
         title,
         description,
@@ -43,7 +44,10 @@ const addPost = asyncHandler(async (req, res) => {
         owner: name,
         user: user._id,
     });
-    res.status(200).json(new ApiResponse(200, { post, userp }, "Post uploaded successfully"))
+    if(!post) {
+        throw new ApiError(400, "Post not created")
+    }
+    res.status(200).json(new ApiResponse(200,post, "Post uploaded successfully"))
 })
 
 const getPosts = asyncHandler(async (req, res) => {

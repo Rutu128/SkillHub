@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import axios from "axios";
 // import { useState } from "react";
 // import { Navbar, Form, FormControl, Button } from "react-bootstrap";
@@ -6,13 +6,51 @@ import axios from "axios";
 // import { Link } from "react-router-dom";
 // import styles from "./Profile.module.css";
 import { SocialIcon } from 'react-social-icons'
-import { PROFILEDATA } from "../../constants/api";
+import { PROFILEDATA, GETSKILLS } from "../../constants/api";
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../constants/routes";
+import { VirtualScroller } from 'primereact/virtualscroller';
+import { classNames } from 'primereact/utils';
+
+let Skills = [];
 
 const Profile = ({ data, imageContainerDisplay }) => {
   // var data1;
+  const [items] = useState(Array.from({ length: 100 }).map((_, i) => `Item #${i}`));
+
+  const itemTemplate = (item, options) => {
+    const className = classNames('flex align-items-center p-2', {
+      'surface-hover': options.odd
+    });
+
+    return (
+      <ul className="domain-list">
+        <li><h5>{item.name}</h5></li>
+      </ul>
+
+    );
+  };
+  const [skills, setSkills] = useState([])
+  const getSkills = async () => {
+
+    axios.defaults.withCredentials = true;
+
+    const res = await axios.get(GETSKILLS).catch((err) => {
+      if (err.response.status === 401) {
+        toast.error("Please Login")
+        navigate(routes.login)
+      }
+      toast.error(err);
+    })
+    // console.log(res.data.data)
+    Skills = res.data.data
+    let skillName = [];
+    Skills.forEach(skill => {
+      skillName.push(skill.name);
+    })
+    setSkills(skillName);
+  }
   const navigate = useNavigate()
   async function getProfile() {
     axios.defaults.withCredentials = true;
@@ -22,8 +60,6 @@ const Profile = ({ data, imageContainerDisplay }) => {
           // console.log(res.status)
           // console.log(res.data.data)
           localStorage.setItem("info", JSON.stringify(res.data?.data.info))
-          localStorage.setItem("skill", JSON.stringify(res.data?.data.skill))
-          localStorage.setItem("project", JSON.stringify(res.data?.data.project))
         }
       }).catch((err) => {
         if (err.response.status === 401) {
@@ -36,16 +72,14 @@ const Profile = ({ data, imageContainerDisplay }) => {
   }
   useEffect(() => {
     getProfile();
+    getSkills();
 
   }, [])
   const user = localStorage.getItem("user");
   const User = JSON.parse(user)
   const info = localStorage.getItem("info");
   const Info = JSON.parse(info)
-  const skill = localStorage.getItem("skill");
-  const Skill = JSON.parse(skill);
-  const project = localStorage.getItem("project");
-  const Project = JSON.parse(project);
+
   const age = Info.age ? Info.age : 18
 
   // console.log("data", data1)
@@ -116,45 +150,53 @@ const Profile = ({ data, imageContainerDisplay }) => {
                     <div className="text-start mb-1-6 wow fadeIn">
                       <h3 className="h3 mb-0 text-primary">Domain/Technology</h3>
                     </div>
-                    <ul className="domain-list">
-                      <li><h5>Web devlopment</h5></li>
-                      <li><h5>Cloud</h5></li>
-                      <li><h5>Security</h5></li>
-                    </ul>
+                    <VirtualScroller items={Skills} itemSize={50} itemTemplate={itemTemplate} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
                   </div>
                 </div>
-                <div className="card border-0 shadow d-flex justify-content-center align-items-center">
-                  <div className="mb-5 wow fadeIn">
-                    <div className="text-start mb-1-6 wow fadeIn">
-                      <h2 className="mb-0 text-primary">Event</h2>
-                    </div>
-                    <div className="row mt-n4">
-                      <div className="col-sm-6 col-xl-4 mt-4">
-                        <div className="card text-center border-0 rounded-3">
-                          <div className="card-body">
-                            <i className="ti-bookmark-alt icon-box medium rounded-3 mb-4" />
-                            <h3 className="h5 mb-0">Project Name</h3>
-                            <p className="mb-0">
-                              AWS
-                            </p>
+                  <div className="card border-0 shadow d-flex justify-content-center align-items-center">
+                    <div className="mb-5 wow fadeIn">
+                      <div className="text-start mb-1-6 wow fadeIn">
+                        <h2 className="mb-0 text-primary">Event</h2>
+                      </div>
+                      <div className="row mt-n4">
+                        <div className="col-sm-6 col-xl-4 mt-4">
+                          <div className="card text-center border-0 rounded-3">
+                            <div className="card-body">
+                              <i className="ti-bookmark-alt icon-box medium rounded-3 mb-4" />
+                              <h3 className="h5 mb-0">Project Name</h3>
+                              <p className="mb-0">
+                                AWS
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className="col-sm-6 col-xl-4 mt-4">
-                        <div className="card text-center border-0 rounded-3">
-                          <div className="card-body">
-                            <i className="ti-medall-alt icon-box medium rounded-3 mb-4" />
-                            <h3 className="h5 mb-3">Discription</h3>
-                            <p className="mb-0">
-                              About 20 years of experience and professional in signage
-                            </p>
+                        <div className="col-sm-6 col-xl-4 mt-4">
+                          <div className="card text-center border-0 rounded-3">
+                            <div className="card-body">
+                              <i className="ti-medall-alt icon-box medium rounded-3 mb-4" />
+                              <h3 className="h5 mb-3">Discription</h3>
+                              <p className="mb-0">
+                                About 20 years of experience and professional in signage
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                        <div className="col-sm-6 col-xl-4 mt-4">
+                          <div className="card text-center border-0 rounded-3">
+                            <div className="card-body">
+                              <i className="ti-link icon-box medium rounded-3 mb-4" />
+                              <h3 className="h5 mb-0">Project link</h3>
+                              <p className="mb-0">
+                                <a href="https://www.google.com">Link</a>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
 
+
+                      </div>
                     </div>
-                  </div>
                 </div>
               </div>
             </div>

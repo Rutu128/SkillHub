@@ -87,3 +87,7 @@ p {
   .skills-list li {
     margin-right: 20px; /* Adjust margin as needed */
   }
+
+  .skill{
+    margin: 10px 0px;
+  }

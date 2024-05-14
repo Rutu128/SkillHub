@@ -52,7 +52,7 @@ function Feed() {
                     console.log("OK")
                     return (
                         <div className="posts" key={post._id}>
-                            <Post userName={post.owner} title={post.title} description={post.description} imageUrl={post.postphoto} />         
+                            <Post userName={post.owner} title={post.title} description={post.description} imageUrl={post.postphoto} id={post._id} />         
                                            </div>
                     );
                 })

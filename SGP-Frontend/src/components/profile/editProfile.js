@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import styles from "./Profileupdate.css";
-import { SocialIcon } from 'react-social-icons';
+// import { SocialIcon } from 'react-social-icons';
 import axios from "axios";
 import { ADDPROJECT, ADDSKILL, CHANGECGPA, GETPROJECTS, GETSKILLS } from "../../constants/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../constants/routes";
+// import { Margin } from "@mui/icons-material";
 
 
 let Skills = [];
@@ -25,8 +26,8 @@ const Profileupdate = () => {
             }
             toast.error(err);
         })
-        console.log(res.data.data)
-        Skills = res.data.data
+        // console.log(res.data.data)
+        Skills = res.data.data  
         let skillName = [];
         Skills.forEach(skill => {
             skillName.push(skill.name);
@@ -44,7 +45,10 @@ const Profileupdate = () => {
             }
             toast.error(err);
         })
-        console.log(res)
+        console.log("project",res.data.data)
+        Projects = res.data.data
+        console.log(Projects)
+        setProjects(Projects)
 
     }
     useEffect(() => {
@@ -62,6 +66,7 @@ const Profileupdate = () => {
     const [editedSkill, setEditedSkill] = useState("");
     const [skills, setSkills] = useState([]);
     const [projects, setProjects] = useState([]);
+    const [newProject, setNewProject] = useState({ title: "", description: "", link: "" })
 
     const handleChange = (e) => {
         setEditedData(e.target.value);
@@ -84,7 +89,13 @@ const Profileupdate = () => {
         setSkills(newSkills);
     };
 
-    const handleAddProject = () => {
+    const handleAddProject = (e) => {
+        // const name = e.target.name;
+        // const value = e.target.value;
+        // setNewProject((preValues) => {
+        //  return   {...preValues,
+        //     [name]: value,}
+        // })
         setProjects([...projects, { title: "", description: "", link: "" }]);
     };
 
@@ -126,7 +137,7 @@ const Profileupdate = () => {
         }).catch((err) => {
             toast.error(err)
         })
-        await axios.post(ADDPROJECT, projects).then((res) => {
+        await axios.post(ADDPROJECT, { project: projects }, { withCredentials: true }).then((res) => {
             if (res.status === 200) {
                 toast.success("Project Added")
             }
@@ -165,13 +176,14 @@ const Profileupdate = () => {
                         (Array.isArray(skills) ? skills : []).length > 0 && (Array.isArray(skills) ? skills : []).map((skill) => {
 
                             return (
-                                <div key={skill._id} className="skill">
+                                <div key={skill._id} className="skill" style={{ margin: "10px 0px" }}>
                                     {skill}
                                     <Button
                                         variant="danger"
                                         size="sm"
                                         onClick={() => handleRemoveSkill(skill._id)}
                                         className={styles.removeButton}
+                                        style={{ margin: "0px 10px" }}
                                     >
                                         Remove
                                     </Button>
@@ -205,7 +217,7 @@ const Profileupdate = () => {
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Edit Projects</Form.Label>
                 <div>
-                    {
+                    {/* {
 
                         (Array.isArray(projects) ? projects : []).length > 0 && (Array.isArray(projects) ? projects : []).map(((project) => {
                             return (
@@ -241,8 +253,8 @@ const Profileupdate = () => {
 
                             )
                         }))
-                    }
-                    {/* {projects.map((project, index) => (
+                    } */}
+                    {projects.map((project, index) => (
                         <div key={index}>
                             <Form.Control
                                 type="text"
@@ -271,7 +283,7 @@ const Profileupdate = () => {
                                 Remove
                             </Button>
                         </div>
-                    ))} */}
+                    ))}
                 </div>
                 <Button variant="primary" onClick={handleAddProject} size="sm">
                     Add Project
